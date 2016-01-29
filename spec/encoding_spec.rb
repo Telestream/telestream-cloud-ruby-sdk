@@ -1,0 +1,260 @@
+require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+
+describe TelestreamCloud::Encoding do
+  before(:each) do
+
+    TelestreamCloud.configure do
+      access_key "my_access_key"
+      secret_key "my_secret_key"
+      api_host "api.example.com"
+      factory_id 'my_cloud_id'
+      api_port 85
+    end
+
+  end
+
+  it "should find by video_id" do
+    encoding_json = "[{\"abc\":\"efg\",\"id\":456}]"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123\/encodings.json/).
+      to_return(:body => encoding_json)
+    TelestreamCloud::Encoding.find_all_by_video_id("123").first.id.should == 456
+  end
+
+  it "should create an encoding using instance method" do
+    encoding_json = "{\"source_url\":\"my_source_url\",\"id\":\"456\"}"
+    stub_http_request(:post, /api.example.com:85\/v3.0\/encodings.json/).
+      with(:body => /source_url=my_source_url/).
+        to_return(:body => encoding_json)
+
+    encoding = TelestreamCloud::Encoding.new(:source_url => "my_source_url", :video_id => "123")
+    encoding.create.should == true
+    encoding.id.should == "456"
+  end
+
+  it "should find by encoding_id" do
+    encoding_json = "{\"abc\":\"efg\",\"id\":\"456\"}"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings\/456.json/).
+      to_return(:body => encoding_json)
+    encoding = TelestreamCloud::Encoding.find("456")
+    encoding.id.should == "456"
+  end
+
+  it "should find by the video through the association" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encoding_json = "{\"abc\":\"efg\",\"id\":\"456\", \"video_id\":\"123\"}"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings\/456.json/).
+      to_return(:body => encoding_json)
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+    encoding = TelestreamCloud::Encoding.find("456")
+    encoding.video.id.should == "123"
+    encoding.id.should == "456"
+  end
+
+  it "should filter on find" do
+    encoding_json = "[{\"source_url\":\"my_source_url\",\"id\":\"456\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings.json/).
+      with{|r| r.uri.query =~ /profile_name=my_profile/ && r.uri.query =~ /video_id=123/ }.
+        to_return(:body => encoding_json)
+
+    encodings = TelestreamCloud::Encoding.all(:video_id => "123", :profile_name => "my_profile")
+    encodings.first.id.should == "456"
+  end
+
+  it "should return the encoding url" do
+    cloud_json = "{\"s3_videos_bucket\":\"my_bucket\",\"id\":\"my_cloud_id\", \"url\":\"http://my-bucket.s3.amazonaws.com/\"}"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/factories\/my_cloud_id.json/).
+      to_return(:body => cloud_json)
+
+    encoding = TelestreamCloud::Encoding.new({:id => "456", :extname => ".ext", :path => "abc/panda", "files" => ["abc/panda.ext"], :status => 'success'})
+    encoding.url.should == "http://my-bucket.s3.amazonaws.com/abc/panda.ext"
+  end
+
+  it "should return the secure encoding url" do
+    cloud_json = "{\"s3_videos_bucket\":\"my_bucket\",\"id\":\"my_cloud_id\", \"url\":\"http://my-bucket.s3.amazonaws.com/\"}"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/factories\/my_cloud_id.json/).
+      to_return(:body => cloud_json)
+
+    encoding = TelestreamCloud::Encoding.new({:id => "456", :extname => ".ext", :path => "abc/panda", "files" => ["abc/panda.ext"], :status => 'success'})
+    encoding.url(:https => true).should == "https://my-bucket.s3.amazonaws.com/abc/panda.ext"
+  end
+
+  it "should generate a screenshot array" do
+    cloud_json = "{\"s3_videos_bucket\":\"my_bucket\",\"id\":\"my_cloud_id\", \"url\":\"http://my-bucket.s3.amazonaws.com/\"}"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/factories\/my_cloud_id.json/).
+      to_return(:body => cloud_json)
+
+    encoding = TelestreamCloud::Encoding.new({:id => "456", :extname => ".ext", :status => "success", :path => "abc/panda"})
+    encoding.screenshots[0].should == "http://my-bucket.s3.amazonaws.com/abc/panda_1.jpg"
+  end
+
+  it "should generate a screenshot array" do
+    encoding = TelestreamCloud::Encoding.new({:id => "456", :extname => ".ext", :status => "fail"})
+    encoding.screenshots.should == []
+  end
+
+
+  it "should create an encoding through the association" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encoding_json = "{\"abc\":\"efg\",\"id\":\"456\", \"video_id\":\"123\", \"profile_id\":\"901\"}"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+
+    stub_http_request(:post, /api.example.com:85\/v3.0\/encodings.json/).
+        with{|r| r.body =~ /video_id=123/ && r.body =~ /profile_id=901/}.
+          to_return(:body => encoding_json)
+
+    video = TelestreamCloud::Video.find("123")
+
+    encoding = video.encodings.create(:profile_id => "901")
+    encoding.id.should == "456"
+    encoding.profile_id.should == "901"
+  end
+
+  it "should create an encoding through the association" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encoding_json = "{\"abc\":\"efg\",\"id\":\"456\", \"video_id\":\"123\", \"profile_id\":\"901\"}"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+
+    stub_http_request(:post, /api.example.com:85\/v3.0\/encodings.json/).
+        with{|r| r.body =~ /video_id=123/ && r.body =~ /profile_id=901/}.
+          to_return(:body => encoding_json)
+
+    video = TelestreamCloud::Video.find("123")
+
+    encoding = video.encodings.create!(:profile_id => "901")
+    encoding.id.should == "456"
+    encoding.profile_id.should == "901"
+  end
+
+
+  it "should filter the profile name after triggering the request" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encodings_1_json = "[{\"id\":\"456\", \"video_id\":\"123\", \"profile_name\":\"h264\"}]"
+    encodings_2_json = "[{\"id\":\"789\", \"video_id\":\"123\", \"profile_name\":\"ogg\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123\/encodings.json/).
+      with{|r| r.uri.query =~ /profile_name=h264/ }.
+          to_return(:body => encodings_1_json)
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123\/encodings.json/).
+      with{|r| r.uri.query =~ /profile_name=ogg/ }.
+          to_return(:body => encodings_2_json)
+
+    video = TelestreamCloud::Video.find("123")
+    video.encodings.find_by_profile_name("h264").id.should == "456"
+    video.encodings.find_by_profile_name("ogg").id.should == "789"
+  end
+
+  it "should create an encoding through the association" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encodings_json = "[{\"abc\":\"efg\",\"id\":\"456\", \"video_id\":\"123\", \"profile_id\":\"901\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123\/encodings.json/).
+        with{|r| r.uri.query =~ /profile_id=901/}.
+          to_return(:body => encodings_json)
+
+    video = TelestreamCloud::Video.find("123")
+    encodings = video.encodings.all(:profile_id => "901")
+    encodings.first.id = "456"
+  end
+
+  it "should create an encoding through the association" do
+    video_json = "{\"source_url\":\"my_source_url\",\"id\":\"123\"}"
+    encodings_json = "[{\"abc\":\"efg\",\"id\":\"456\", \"video_id\":\"123\", \"profile_id\":\"901\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123.json/).
+      to_return(:body => video_json)
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/videos\/123\/encodings.json/).
+        with{|r| r.uri.query =~ /profile_id=901/}.
+          to_return(:body => encodings_json)
+
+    video = TelestreamCloud::Video.find("123")
+    encodings = video.encodings.profile("901")
+    encodings.first.id = "456"
+  end
+
+  it "should filter encodings specifying video and status as a method" do
+    encoding_json = "[{\"source_url\":\"my_source_url\",\"id\":\"456\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings.json/).
+      with{|r| r.uri.query =~ /status=success/ && r.uri.query =~ /video_id=123/ }.
+        to_return(:body => encoding_json)
+
+    encodings = TelestreamCloud::Encoding.video(123).status("success").all
+    encodings.first.id.should == "456"
+  end
+
+  it "should filter encodings specifying video and status as a method" do
+    encoding_json = "[{\"source_url\":\"my_source_url\",\"id\":\"456\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings.json/).
+      with{|r| r.uri.query =~ /profile_id=prof_1/ && r.uri.query =~ /video_id=123/ }.
+        to_return(:body => encoding_json)
+
+    encodings = TelestreamCloud::Encoding.video(123).profile("prof_1").all
+    encodings.first.id.should == "456"
+  end
+
+  it "should filter encodings specifying video and profile id as a method" do
+    encoding_json = "[{\"source_url\":\"my_source_url\",\"id\":\"456\"}]"
+
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings.json/).
+      with{|r| r.uri.query =~ /profile_name=prof_name/ && r.uri.query =~ /video_id=123/ }.
+        to_return(:body => encoding_json)
+
+    encodings = TelestreamCloud::Encoding.video(123).profile_name("prof_name").all
+    encodings.first.id.should == "456"
+  end
+
+  it "should find an encoding" do
+    encoding_json = "[{\"source_url\":\"my_source_url\",\"id\":\"456\"}]"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings\/456.json/).
+      to_return(:body => encoding_json)
+
+    TelestreamCloud::Encoding.find("456")
+  end
+
+  it "should tell if the encoding is success" do
+    encoding = TelestreamCloud::Encoding.new({:status => "success"})
+    encoding.success?.should == true
+    encoding.processing?.should == false
+  end
+
+  it "should tell if the encoding is success" do
+    encoding = TelestreamCloud::Encoding.new({:status => "processing"})
+    encoding.success?.should == false
+    encoding.processing?.should == true
+  end
+
+  it "should tell if the encoding is success" do
+    encoding = TelestreamCloud::Encoding.new({:status => "fail"})
+    encoding.success?.should == false
+    encoding.fail?.should == true
+  end
+
+  it "should return the most recent updated encoding" do
+    video_json = "[{\"source_url\":\"url_panda.mp4\",\"id\":\"123\"}]"
+    stub_http_request(:get, /api.example.com:85\/v3.0\/encodings.json/).
+      with{|r| r.uri.query =~ /per_page=1/ }.
+        to_return(:body => video_json)
+    TelestreamCloud::Encoding.first
+  end
+
+  it "should not delegate scope if the method do not really exist in the scope" do
+    lambda {TelestreamCloud::Encoding.reload}.should raise_error(NoMethodError)
+    lambda {TelestreamCloud::Encoding.each}.should raise_error(NoMethodError)
+    lambda {TelestreamCloud::Encoding.size}.should raise_error(NoMethodError)
+  end
+end
