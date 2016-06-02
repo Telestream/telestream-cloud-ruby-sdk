@@ -17,17 +17,17 @@ TelestreamCloud gem provides an interface to access the [TelestreamCloud](http:/
     You can just set the default Panda adapter if you are not happy with the current one.
 
     TelestreamCloud.default_adapter = :excon
-    
+
     For rails 4, try the net_http adapter. This fixes disable_ssl_peer_verification related errors caused by the default adapter.
-    
+
     TelestreamCloud.default_adapter = :net_http
-    
+
 ### Creating an instance of the client
 ```ruby
 TelestreamCloud.configure do
   access_key "your_access_key"
   secret_key "your_secret_key"
-  # api_host "api.cloud.telestream.net" # this will be set bu default
+  # api_host "api.cloud.telestream.net" # this will be set by default
 end
 ```
 or
@@ -80,7 +80,7 @@ end
 
 # Accessing specific Factory
 f1 = flip.factories.all[0]
-# or 
+# or
 f2 = flip.factories.find('factory_id')
 ```
 
@@ -93,7 +93,7 @@ videos.first.id
 => "abcde"
 
 videos = factory.videos.all(:page => 2, :per_page => 20)
-# or 
+# or
 videos = factory.videos.page(1).per_page(20)
 videos.size
 => 20
@@ -176,7 +176,7 @@ encoding.screenshots[0]
 
 # Create new encoding for a video that already exists
 encoding = factory.encodings.create(:video_id => 1234, :profile_id => 6789)
-# or 
+# or
 video.encodings.create(:profile_id => 6789)
 
 # Delete encoding
@@ -303,12 +303,12 @@ TelestreamCloud.get('/videos.json')
   "status"=>"success",
   "width"=>300}]
 
-# Getting video encodings 
+# Getting video encodings
 TelestreamCloud.get('/videos/0ee6b656-0063-11df-a433-1231390041c1/encodings.json')
 => [{"encoder_id"=>nil,
   "created_at"=>"2010/01/13 16:45:30 +0000",
   "video_id"=>"0ee6b656-0063-11df-a433-1231390041c1",
-  "video_url"=> 
+  "video_url"=>
       "http://s3.amazonaws.com/panda-videos/0f815986-0063-11df-a433-1231390041c1.flv",
   "started_encoding_at"=>"2010/01/13 16:47:35 +0000",
   "updated_at"=>"2010/01/13 16:47:40 +0000",
@@ -341,7 +341,7 @@ retry_count = 0
 begin
   us.start()
 rescue Exception => e
-  while retru_count < 5 and us.status != "success"
+  while retry_count < 5 and us.status != "success"
     begin
       sleep(5)
       us.resume()
