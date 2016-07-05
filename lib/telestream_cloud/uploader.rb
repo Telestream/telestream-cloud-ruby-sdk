@@ -59,6 +59,11 @@ module TelestreamCloud
     def send_chunk(index)
       range = (index * part_size...[(index + 1) * part_size, reader.size].min)
 
+      # TODO: remove when 1.9 dropped
+      unless range.respond_to?(:size)
+        def range.size; self.end - self.begin + (exclude_end? ? 0 : 1); end
+      end
+
       response = http.put do |request|
         request.headers['Content-Type'] = 'application/octet-stream'
         request.headers['X-Part'] = "#{index}"
@@ -102,7 +107,7 @@ module TelestreamCloud
       @session ||= TelestreamCloud.post('/videos/upload.json', @params)
 
       if !@session || @session['error']
-        fail UploadError, @session && [@session['error'], @session['message']]
+        fail UploadError, @session && @session.values_at('error', 'message')
       end
 
       @session
