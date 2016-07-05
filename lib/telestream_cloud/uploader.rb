@@ -78,7 +78,7 @@ module TelestreamCloud
     def set_video(response)
       return if response.status != 200 || response.body.empty?
       @video = Video.new(JSON.parse(response.body))
-      self.status = :success if @video.id
+      self.status = :success
     end
 
     def status=(status)
