@@ -27,4 +27,6 @@ require 'telestream_cloud/flip'
 require 'telestream_cloud/telestream_cloud'
 require 'telestream_cloud/faraday'
 require 'telestream_cloud/upload_session'
-
+require 'telestream_cloud/uploader'
+require 'telestream_cloud/uploader/file_reader'
+require 'telestream_cloud/parallel_uploader'
