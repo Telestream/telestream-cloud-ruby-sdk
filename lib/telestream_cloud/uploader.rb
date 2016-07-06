@@ -8,7 +8,14 @@ module TelestreamCloud
 
     attr_reader :reader, :video, :status, :error
 
-    def initialize(file, options = {})
+    def self.upload(options)
+      retries = options.delete(:retries)
+      new(options).tap { |x| x.upload(*[retries].compact) }.video
+    end
+
+    def initialize(options)
+      file = options.delete(:file) { |key| fail KeyError, "key not found: #{key}" }
+
       @reader = FileReader.new(file)
 
       defaults = {

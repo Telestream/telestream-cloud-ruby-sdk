@@ -29,7 +29,7 @@ module TelestreamCloud
 
     attr_reader :concurrency
 
-    def initialize(video, options = {})
+    def initialize(options)
       @concurrency = options.delete(:concurrency)
       super
     end

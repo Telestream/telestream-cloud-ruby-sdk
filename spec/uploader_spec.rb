@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TelestreamCloud::Uploader do
+shared_examples_for "uploader" do
   let(:file_size) { 45_000_000 }
   let(:file) do
     double(:file,
@@ -17,10 +17,6 @@ describe TelestreamCloud::Uploader do
       factory_id 'my_cloud_id'
       api_port 85
     end
-  end
-
-  subject do
-    TelestreamCloud::Uploader.new(file)
   end
 
   describe '#upload' do
@@ -110,4 +106,38 @@ describe TelestreamCloud::Uploader do
       end
     end
   end
+
+  describe '.upload' do
+    it 'calls #upload' do
+      video = double(:video)
+      expect_any_instance_of(subject.class).to receive(:upload)
+      expect_any_instance_of(subject.class).to receive(:video).and_return(video)
+
+      expect(subject.class.upload(file: file)).to eq(video)
+    end
+
+    it 'calls #upload with retries options' do
+      video = double(:video)
+      expect_any_instance_of(subject.class).to receive(:upload).with(5)
+      expect_any_instance_of(subject.class).to receive(:video).and_return(video)
+
+      expect(subject.class.upload(file: file, retries: 5)).to eq(video)
+    end
+  end
+end
+
+describe TelestreamCloud::Uploader do
+  subject do
+    TelestreamCloud::Uploader.new(file: file)
+  end
+
+  it_behaves_like "uploader"
+end
+
+describe TelestreamCloud::ParallelUploader do
+  subject do
+    TelestreamCloud::ParallelUploader.new(file: file)
+  end
+
+  it_behaves_like "uploader"
 end

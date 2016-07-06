@@ -135,6 +135,35 @@ video.delete
 => true
 ```
 
+### Parallel and fail-safe upload
+
+```ruby
+# Create video unsing parallel uploader
+
+video = TelestreamCloud::ParallelUploader.upload(
+          file: File.new('movie.mp4'),
+          concurrency: 8,
+          profiles: 'webm'
+        )
+
+# Create video standard parallel uploader
+video = TelestreamCloud::Uploader.upload(
+          file: File.new("/path/to/my/movie.mp4"),
+          profiles: "h264,webm",
+          retries: 3
+        )
+
+# You can also upload video manually
+uploader = TelestreamCloud::Uploader.new(
+             file: File.new("/path/to/my/movie.mp4"),
+             profiles: "h264,webm",
+           )
+
+uploader.upload(3)
+uploader.status # => :success
+video = uploader.video
+```
+
 ### Encodings
 
 ```ruby
@@ -332,26 +361,6 @@ TelestreamCloud.delete('/videos/0ee6b656-0063-11df-a433-1231390041c1.json')
 bundler install
 rake spec
 ```
-
-### Resumable upload
-```ruby
-us = TelestreamCloud::UploadSession.new("movie.mp4", profiles: "webm")
-
-retry_count = 0
-begin
-  us.start()
-rescue Exception => e
-  while retry_count < 5 and us.status != "success"
-    begin
-      sleep(5)
-      us.resume()
-    rescue Exception => e
-      retry_count += 1
-    end
-  end
-end
-```
-
 
 
 Copyright (c) 2016 Telestream Cloud. See LICENSE for details.

@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Telestream Cloud"]
   s.email       = ["cloudsupport@telestream.net"]
-  s.homepage    = "http://github.com/pandastream/panda_gem"
+  s.homepage    = "https://github.com/Telestream/telestream-cloud-ruby-sdk"
   s.summary     = %q{Telestream Cloud Client}
   s.description = %q{Telestream Cloud Client}
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "timecop"
   s.add_development_dependency "rspec", ">= 2.8.0"
   s.add_development_dependency "webmock", ">= 1.8.2"
-  
+
   s.rubyforge_project = "telestream_cloud"
 
   s.files         = `git ls-files`.split("\n")
