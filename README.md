@@ -138,7 +138,7 @@ video.delete
 ### Parallel and fail-safe upload
 
 ```ruby
-# Create video unsing parallel uploader
+# Create video using parallel uploader
 
 video = TelestreamCloud::ParallelUploader.upload(
           file: File.new('movie.mp4'),
@@ -146,7 +146,7 @@ video = TelestreamCloud::ParallelUploader.upload(
           profiles: 'webm'
         )
 
-# Create video standard parallel uploader
+# Create video using standard uploader
 video = TelestreamCloud::Uploader.upload(
           file: File.new("/path/to/my/movie.mp4"),
           profiles: "h264,webm",
