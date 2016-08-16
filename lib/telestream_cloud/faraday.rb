@@ -5,11 +5,11 @@ require 'multi_json'
 module TelestreamCloud
   module HttpClient
     class Faraday
-      
+
       def initialize(api_url)
         @api_url = api_url
       end
-      
+
       def get(request_uri, params)
         rescue_json_parsing do
           connection.get do |req|
@@ -22,19 +22,24 @@ module TelestreamCloud
         # multipart upload
         params['file'] = ::Faraday::UploadIO.new(params['file'], 'multipart/form-data') if params['file']
 
+        signature_params = delete_signature_params(params)
+
         rescue_json_parsing do
           connection.post do |req|
-            req.url File.join(connection.path_prefix, request_uri)
+            req.url File.join(connection.path_prefix, request_uri), signature_params
             req.body = params
           end.body
         end
       end
 
       def put(request_uri, params)
+        signature_params = delete_signature_params(params)
+
         rescue_json_parsing do
           connection.put do |req|
-            req.url File.join(connection.path_prefix, request_uri)
+            req.url File.join(connection.path_prefix, request_uri), signature_params
             req.body = params
+
           end.body
         end
       end
@@ -46,9 +51,19 @@ module TelestreamCloud
           end.body
         end
       end
-      
+
       private
-      
+
+      def delete_signature_params(hash)
+        params = {}
+
+        %w(access_key timestamp signature).each do |key|
+          params[key] = hash.delete(key)
+        end
+
+        params
+      end
+
       def connection
         @conn ||= ::Faraday.new(:url => @api_url) do |builder|
           builder.request :multipart
@@ -65,7 +80,6 @@ module TelestreamCloud
           raise ServiceNotAvailable, data
         end
       end
-      
     end
   end
 end
@@ -77,7 +91,7 @@ elsif defined?(Excon)
 elsif defined?(Patron)
   TelestreamCloud.default_adapter = :patron
 elsif defined?(NetHttpPersistent)
-  TelestreamCloud.default_adapter = :net_http_persisten
+  TelestreamCloud.default_adapter = :net_http_persistent
 else
   TelestreamCloud.default_adapter = :net_http
 end

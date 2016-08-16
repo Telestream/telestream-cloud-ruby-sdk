@@ -11,12 +11,16 @@ shared_examples_for "uploader" do
 
   before(:each) do
     TelestreamCloud.configure do
-      access_key "my_access_key"
+      access_key 'my_access_key'
       secret_key "my_secret_key"
       api_host "api.example.com"
       factory_id 'my_cloud_id'
       api_port 85
     end
+  end
+
+  let(:api_upload_url) do
+    %r{http://api.example.com:85/v3.0/videos/upload.json\?access_key=my_access_key&signature=[\w/+]+=&timestamp=}
   end
 
   describe '#upload' do
@@ -33,8 +37,7 @@ shared_examples_for "uploader" do
       end
 
       before do
-        stub_request(:post, "http://api.example.com:85/v3.0/videos/upload.json")
-          .to_return(body: session_json)
+        stub_request(:post, api_upload_url).to_return(body: session_json)
 
         expect(file).to receive(:read).with(part_size).and_return("chunk").exactly(4).times
         expect(file).to receive(:read).with(file_size % part_size).and_return("chunk").once
@@ -96,8 +99,7 @@ shared_examples_for "uploader" do
       end
 
       it 'fails' do
-        stub_request(:post, "http://api.example.com:85/v3.0/videos/upload.json")
-          .to_return(body: session_json)
+        stub_request(:post, api_upload_url).to_return(body: session_json)
 
         subject.upload
 
