@@ -34,6 +34,15 @@ module TelestreamCloud
       super
     end
 
+    def upload
+      super
+      files.each do |name, file|
+        self.tag = name
+        reset
+        super
+      end
+    end
+
     private
 
     def upload_chunks(ids)

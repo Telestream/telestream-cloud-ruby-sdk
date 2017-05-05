@@ -18,14 +18,16 @@ module TelestreamCloud
         end
       end
 
-      def post(request_uri, params)
+      def post(request_uri, params = {}, json = false)
         # multipart upload
         params['file'] = ::Faraday::UploadIO.new(params['file'], 'multipart/form-data') if params['file']
 
         rescue_json_parsing do
           connection.post do |req|
             req.url File.join(connection.path_prefix, request_uri)
-            req.body = params
+            req.headers["Content-Type"] = "application/json" if json
+            req.body = params if !json
+            req.body = params.to_json if json
           end.body
         end
       end
