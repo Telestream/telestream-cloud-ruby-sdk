@@ -1,3 +1,4 @@
+require 'digest'
 module TelestreamCloud
 
   API_PORT = 443
@@ -31,8 +32,24 @@ module TelestreamCloud
     end
 
     def post(request_uri, params={})
-      sp = signed_params("POST", request_uri, params)
-      http_client.post(request_uri, sp)
+      if params[:signature_version] && params[:signature_version].to_i == 2
+        sha = Digest::SHA256.new
+        sha.update params.to_json
+
+        sp = signed_params("POST", request_uri, {
+                             signature_version: 2,
+                             checksum: sha.hexdigest,
+                           })
+
+        begin
+        http_client.post("#{request_uri}?#{ApiAuthentication.hash_to_query(sp)}", params, true)
+        rescue Exception => ex
+          puts ex
+        end
+      else
+        sp = signed_params("POST", request_uri, params)
+        http_client.post(request_uri, params.to_json)
+      end
     end
 
     def put(request_uri, params={})

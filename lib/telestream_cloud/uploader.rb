@@ -6,7 +6,8 @@ module TelestreamCloud
     class UploadError < StandardError; end
     class MissingPartError < StandardError; end
 
-    attr_reader :reader, :video, :status, :error
+    attr_reader :video, :status, :error, :tag
+    attr_writer :tag
 
     def self.upload(options)
       retries = options.delete(:retries)
@@ -15,17 +16,48 @@ module TelestreamCloud
 
     def initialize(options)
       file = options.delete(:file) { |key| fail KeyError, "key not found: #{key}" }
-
+      @tag = ""
       @reader = FileReader.new(file)
+      extra_files = options.delete(:extra_files)
 
       defaults = {
-        file_size: reader.size,
-        file_name: reader.name,
-        multi_chunk: true
+        signature_version: '2',
+        file_size: @reader.size,
+        file_name: @reader.name,
+        multi_chunk: true,
+        extra_files: [],
       }
+      @files = {}
+
+      extra_files.each do |key, ef|
+        if ef.is_a?(Array)
+          i = 0
+          ef.each { |file|
+            defaults[:extra_files] << add_file("#{key}.index-#{i}", file)
+            i+=1
+          }
+        else
+          defaults[:extra_files] << add_file(key, ef)
+        end
+      end if extra_files
 
       @params = defaults.merge(options)
       @status = :ready
+    end
+
+    def files
+      @files
+    end
+
+    def add_file(key, file)
+      file_reader = FileReader.new(file)
+      files[key] = file_reader
+
+      {
+        tag: key,
+        file_size: file_reader.size,
+        file_name: file_reader.name,
+      }
     end
 
     def upload(retries = 5)
@@ -74,6 +106,7 @@ module TelestreamCloud
       response = http.put do |request|
         request.headers['Content-Type'] = 'application/octet-stream'
         request.headers['X-Part'] = "#{index}"
+        request.headers['X-Extra-File-Tag'] = tag
         request.headers['Content-Length'] = "#{range.size}"
         request.body = reader[range]
       end
@@ -99,6 +132,7 @@ module TelestreamCloud
         builder.request :multipart
         builder.request :url_encoded
         builder.adapter TelestreamCloud.default_adapter
+        builder.headers['X-Extra-File-Tag'] = tag
       end
     end
 
@@ -118,6 +152,18 @@ module TelestreamCloud
       end
 
       @session
+    end
+
+    def reset
+      @http = nil
+      @status = :ready
+    end
+    def reader
+      if tag == ""
+        @reader
+      else
+        files[tag]
+      end
     end
   end
 end
