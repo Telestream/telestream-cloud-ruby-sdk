@@ -103,6 +103,19 @@ describe 'FlipApi' do
     end
   end
 
+  # unit tests for create_video
+  # Creates a Video from a provided source_url.
+  # 
+  # @param factory_id Id of a Factory.
+  # @param create_video_body 
+  # @param [Hash] opts the optional parameters
+  # @return [Video]
+  describe 'create_video test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for create_workorder
   # Creates a Workorder.
   # 

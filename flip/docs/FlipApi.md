@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**create_encoding**](FlipApi.md#create_encoding) | **POST** /encodings.json | Creates an Encoding
 [**create_factory**](FlipApi.md#create_factory) | **POST** /factories.json | Creates a new factory
 [**create_profile**](FlipApi.md#create_profile) | **POST** /profiles.json | Creates a Profile
+[**create_video**](FlipApi.md#create_video) | **POST** /videos.json | Creates a Video from a provided source_url.
 [**create_workorder**](FlipApi.md#create_workorder) | **POST** /workorders.json | Creates a Workorder.
 [**delete_encoding**](FlipApi.md#delete_encoding) | **DELETE** /encodings/{id}.json | Deletes an Encoding from both Telestream Cloud and your storage. Returns an information whether the operation was successful.
 [**delete_profile**](FlipApi.md#delete_profile) | **DELETE** /profiles/{id}.json | Deletes a given Profile
@@ -325,6 +326,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Profile**](Profile.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **create_video**
+> Video create_video(factory_id, create_video_body)
+
+Creates a Video from a provided source_url.
+
+### Example
+```ruby
+# load the gem
+require 'telestream_cloud_flip'
+# setup authorization
+TelestreamCloud::Flip.configure do |config|
+  # Configure API key authorization: api_key
+  config.api_key['X-Api-Key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['X-Api-Key'] = 'Bearer'
+end
+
+api_instance = TelestreamCloud::Flip::FlipApi.new
+
+factory_id = "factory_id_example" # String | Id of a Factory.
+
+create_video_body = TelestreamCloud::Flip::CreateVideoBody.new # CreateVideoBody | 
+
+
+begin
+  #Creates a Video from a provided source_url.
+  result = api_instance.create_video(factory_id, create_video_body)
+  p result
+rescue TelestreamCloud::Flip::ApiError => e
+  puts "Exception when calling FlipApi->create_video: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **factory_id** | **String**| Id of a Factory. | 
+ **create_video_body** | [**CreateVideoBody**](CreateVideoBody.md)|  | 
+
+### Return type
+
+[**Video**](Video.md)
 
 ### Authorization
 

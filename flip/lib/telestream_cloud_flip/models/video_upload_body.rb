@@ -29,6 +29,7 @@ module TelestreamCloud::Flip
 
     attr_accessor :path_format
 
+    # Payload is an arbitrary text of length 256 or shorter that you can store along the Video. It is typically used to retain an association with one of your own DB record ID.
     attr_accessor :payload
 
     attr_accessor :extra_variables
@@ -94,7 +95,7 @@ module TelestreamCloud::Flip
         :'extra_files' => :'Array<ExtraFile>',
         :'profiles' => :'String',
         :'path_format' => :'String',
-        :'payload' => :'Hash<String, String>',
+        :'payload' => :'String',
         :'extra_variables' => :'Hash<String, String>',
         :'watermark_url' => :'String',
         :'watermark_left' => :'String',
@@ -140,9 +141,7 @@ module TelestreamCloud::Flip
       end
 
       if attributes.has_key?(:'payload')
-        if (value = attributes[:'payload']).is_a?(Array)
-          self.payload = value
-        end
+        self.payload = attributes[:'payload']
       end
 
       if attributes.has_key?(:'extra_variables')
