@@ -236,10 +236,6 @@ module TelestreamCloud::Qc
                    @factory_id ||= @params.delete(:factory_id) do |key|
                      raise KeyError, "key not found: #{key}"
                    end
-                 when "TelestreamCloud::Qc::QcApi"
-                   @factory_id ||= @params.delete(:factory_id) do |key|
-                     raise KeyError, "key not found: #{key}"
-                   end
 
                    @client.upload_video(@factory_id, @params)
                  end
