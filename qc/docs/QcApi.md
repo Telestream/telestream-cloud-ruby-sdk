@@ -4,23 +4,23 @@ All URIs are relative to *https://api.cloud.telestream.net/qc/v1.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancel_job**](QcApi.md#cancel_job) | **PUT** /projects/{project}/jobs/{job}/cancel.json | 
-[**create_job**](QcApi.md#create_job) | **POST** /projects/{project}/jobs.json | Create a new job
+[**cancel_job**](QcApi.md#cancel_job) | **PUT** /projects/{project_id}/jobs/{job_id}/cancel.json | 
+[**create_job**](QcApi.md#create_job) | **POST** /projects/{project_id}/jobs.json | Create a new job
 [**create_project**](QcApi.md#create_project) | **POST** /projects.json | Create a new project
-[**get_job**](QcApi.md#get_job) | **GET** /projects/{project}/jobs/{job}.json | Get QC job
-[**get_project**](QcApi.md#get_project) | **GET** /projects/{project}.json | Get project by Id
-[**list_jobs**](QcApi.md#list_jobs) | **GET** /projects/{project}/jobs.json | Get jobs form projects
+[**get_job**](QcApi.md#get_job) | **GET** /projects/{project_id}/jobs/{job_id}.json | Get QC job
+[**get_project**](QcApi.md#get_project) | **GET** /projects/{project_id}.json | Get project by Id
+[**list_jobs**](QcApi.md#list_jobs) | **GET** /projects/{project_id}/jobs.json | Get jobs form projects
 [**list_projects**](QcApi.md#list_projects) | **GET** /projects.json | List all projects for an account
-[**modify_project**](QcApi.md#modify_project) | **PUT** /projects/{project}.json | Modify project
-[**proxy**](QcApi.md#proxy) | **GET** /projects/{project}/jobs/{job}/proxy.json | 
-[**remove_job**](QcApi.md#remove_job) | **DELETE** /projects/{project}/jobs/{job}.json | 
-[**remove_project**](QcApi.md#remove_project) | **DELETE** /projects/{project}.json | 
-[**signed_urls**](QcApi.md#signed_urls) | **GET** /projects/{project}/jobs/{job}/signed-urls.json | 
-[**upload_video**](QcApi.md#upload_video) | **POST** /projects/{project}/upload.json | Creates an upload session
+[**modify_project**](QcApi.md#modify_project) | **PUT** /projects/{project_id}.json | Modify project
+[**proxy**](QcApi.md#proxy) | **GET** /projects/{project_id}/jobs/{job_id}/proxy.json | 
+[**remove_job**](QcApi.md#remove_job) | **DELETE** /projects/{project_id}/jobs/{job_id}.json | 
+[**remove_project**](QcApi.md#remove_project) | **DELETE** /projects/{project_id}.json | 
+[**signed_urls**](QcApi.md#signed_urls) | **GET** /projects/{project_id}/jobs/{job_id}/signed-urls.json | 
+[**upload_video**](QcApi.md#upload_video) | **POST** /projects/{project_id}/upload.json | Creates an upload session
 
 
 # **cancel_job**
-> cancel_job(project, job)
+> cancel_job(project_id, job_id)
 
 
 
@@ -38,13 +38,13 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
-job = "job_example" # String | A unique identifier of a Job.
+job_id = "job_id_example" # String | A unique identifier of a Job.
 
 
 begin
-  api_instance.cancel_job(project, job)
+  api_instance.cancel_job(project_id, job_id)
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->cancel_job: #{e}"
 end
@@ -54,8 +54,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
- **job** | **String**| A unique identifier of a Job. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
+ **job_id** | **String**| A unique identifier of a Job. | 
 
 ### Return type
 
@@ -73,7 +73,7 @@ nil (empty response body)
 
 
 # **create_job**
-> Job create_job(project, data)
+> Job create_job(project_id, data)
 
 Create a new job
 
@@ -91,14 +91,14 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
 data = TelestreamCloud::Qc::JobData.new # JobData | 
 
 
 begin
   #Create a new job
-  result = api_instance.create_job(project, data)
+  result = api_instance.create_job(project_id, data)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->create_job: #{e}"
@@ -109,7 +109,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
  **data** | [**JobData**](JobData.md)|  | 
 
 ### Return type
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 
 # **get_job**
-> Job get_job(project, job)
+> Job get_job(project_id, job_id)
 
 Get QC job
 
@@ -199,14 +199,14 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
-job = "job_example" # String | A unique identifier of a Job.
+job_id = "job_id_example" # String | A unique identifier of a Job.
 
 
 begin
   #Get QC job
-  result = api_instance.get_job(project, job)
+  result = api_instance.get_job(project_id, job_id)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->get_job: #{e}"
@@ -217,8 +217,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
- **job** | **String**| A unique identifier of a Job. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
+ **job_id** | **String**| A unique identifier of a Job. | 
 
 ### Return type
 
@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 
 
 # **get_project**
-> Project get_project(project)
+> Project get_project(project_id)
 
 Get project by Id
 
@@ -254,12 +254,12 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
 
 begin
   #Get project by Id
-  result = api_instance.get_project(project)
+  result = api_instance.get_project(project_id)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->get_project: #{e}"
@@ -270,7 +270,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
 
 ### Return type
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 
 # **list_jobs**
-> JobsCollection list_jobs(project, opts)
+> JobsCollection list_jobs(project_id, opts)
 
 Get jobs form projects
 
@@ -306,7 +306,7 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
 opts = { 
   expand: true, # BOOLEAN | Expand details of job
@@ -317,7 +317,7 @@ opts = {
 
 begin
   #Get jobs form projects
-  result = api_instance.list_jobs(project, opts)
+  result = api_instance.list_jobs(project_id, opts)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->list_jobs: #{e}"
@@ -328,7 +328,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
  **expand** | **BOOLEAN**| Expand details of job | [optional] 
  **status** | **String**| Filter jobs by status | [optional] 
  **per_page** | **Integer**| Limit number of listed jobs | [optional] [default to 30]
@@ -396,7 +396,7 @@ This endpoint does not need any parameter.
 
 
 # **modify_project**
-> Project modify_project(project, opts)
+> Project modify_project(project_id, opts)
 
 Modify project
 
@@ -414,7 +414,7 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | 
+project_id = "project_id_example" # String | 
 
 opts = { 
   data: TelestreamCloud::Qc::Data1.new # Data1 | 
@@ -422,7 +422,7 @@ opts = {
 
 begin
   #Modify project
-  result = api_instance.modify_project(project, opts)
+  result = api_instance.modify_project(project_id, opts)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->modify_project: #{e}"
@@ -433,7 +433,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**|  | 
+ **project_id** | **String**|  | 
  **data** | [**Data1**](Data1.md)|  | [optional] 
 
 ### Return type
@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 
 
 # **proxy**
-> Proxy proxy(project, job)
+> Proxy proxy(project_id, job_id)
 
 
 
@@ -470,13 +470,13 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
-job = "job_example" # String | A unique identifier of a Job.
+job_id = "job_id_example" # String | A unique identifier of a Job.
 
 
 begin
-  result = api_instance.proxy(project, job)
+  result = api_instance.proxy(project_id, job_id)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->proxy: #{e}"
@@ -487,8 +487,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
- **job** | **String**| A unique identifier of a Job. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
+ **job_id** | **String**| A unique identifier of a Job. | 
 
 ### Return type
 
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 
 
 # **remove_job**
-> remove_job(project, job)
+> remove_job(project_id, job_id)
 
 
 
@@ -524,13 +524,13 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
-job = "job_example" # String | A unique identifier of a Job.
+job_id = "job_id_example" # String | A unique identifier of a Job.
 
 
 begin
-  api_instance.remove_job(project, job)
+  api_instance.remove_job(project_id, job_id)
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->remove_job: #{e}"
 end
@@ -540,8 +540,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
- **job** | **String**| A unique identifier of a Job. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
+ **job_id** | **String**| A unique identifier of a Job. | 
 
 ### Return type
 
@@ -559,7 +559,7 @@ nil (empty response body)
 
 
 # **remove_project**
-> remove_project(project)
+> remove_project(project_id)
 
 
 
@@ -577,11 +577,11 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | 
+project_id = "project_id_example" # String | 
 
 
 begin
-  api_instance.remove_project(project)
+  api_instance.remove_project(project_id)
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->remove_project: #{e}"
 end
@@ -591,7 +591,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**|  | 
+ **project_id** | **String**|  | 
 
 ### Return type
 
@@ -609,7 +609,7 @@ nil (empty response body)
 
 
 # **signed_urls**
-> Hash&lt;String, String&gt; signed_urls(project, job)
+> Hash&lt;String, String&gt; signed_urls(project_id, job_id)
 
 
 
@@ -627,13 +627,13 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
-job = "job_example" # String | A unique identifier of a Job.
+job_id = "job_id_example" # String | A unique identifier of a Job.
 
 
 begin
-  result = api_instance.signed_urls(project, job)
+  result = api_instance.signed_urls(project_id, job_id)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->signed_urls: #{e}"
@@ -644,8 +644,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
- **job** | **String**| A unique identifier of a Job. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
+ **job_id** | **String**| A unique identifier of a Job. | 
 
 ### Return type
 
@@ -663,7 +663,7 @@ Name | Type | Description  | Notes
 
 
 # **upload_video**
-> UploadSession upload_video(project, video_upload_body)
+> UploadSession upload_video(project_id, video_upload_body)
 
 Creates an upload session
 
@@ -681,14 +681,14 @@ end
 
 api_instance = TelestreamCloud::Qc::QcApi.new
 
-project = "project_example" # String | A unique identifier of a Project.
+project_id = "project_id_example" # String | A unique identifier of a Project.
 
 video_upload_body = TelestreamCloud::Qc::VideoUploadBody.new # VideoUploadBody | 
 
 
 begin
   #Creates an upload session
-  result = api_instance.upload_video(project, video_upload_body)
+  result = api_instance.upload_video(project_id, video_upload_body)
   p result
 rescue TelestreamCloud::Qc::ApiError => e
   puts "Exception when calling QcApi->upload_video: #{e}"
@@ -699,7 +699,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | **String**| A unique identifier of a Project. | 
+ **project_id** | **String**| A unique identifier of a Project. | 
  **video_upload_body** | [**VideoUploadBody**](VideoUploadBody.md)|  | 
 
 ### Return type

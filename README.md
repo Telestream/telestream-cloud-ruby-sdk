@@ -5,25 +5,21 @@
 In order to use TCS api client first you need to get `ApiKey`. Login to [website](https://cloud.telestream.net/console), go to *Flip* service and open *API Access* tab.
 You account will be identified by unique *Api Key*, if it is unavailable click *Reset* button.
 
-### Usage
-This example show uploading media file to flip service. If you want to use other service refer to [services](#services).
+### Install
 
-    require 'telestream_cloud_flip'
+Add the following line to Gemfile:
 
-    TelestreamCloud::Flip.configure do |config|
-        config.api_key['X-Api-Key'] = 'tcs_xxx'
-    end
+```
+gem 'telestream_cloud'
+```
 
-    client = TelestreamCloud::Flip::FlipApi.new
+and run bundle install from your shell.
 
-    options = {
-        file: '/video/mp4',
-        factory_id: 'tg01xxx',
-    }
+To install the gem manually from your shell, run:
 
-    upload = TelestreamCloud::Flip::Uploader.new(client, options)
-
-    video = upload.upload
+```
+gem install telestream_cloud
+```
 
 ## Services
 Api client is divided into parts corresponding to services provided. Currently supported services include:

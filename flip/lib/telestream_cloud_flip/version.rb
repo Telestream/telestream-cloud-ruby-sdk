@@ -14,5 +14,5 @@ Swagger Codegen version: 2.3.0
 =end
 
 module TelestreamCloud::Flip
-  VERSION = "1.0.0"
+  VERSION = "2.0.0"
 end

@@ -130,7 +130,7 @@ module TelestreamCloud::Flip
     def initialize
       @scheme = 'https'
       @host = 'api.cloud.telestream.net'
-      @base_path = '/api/flip/3.1'
+      @base_path = '/flip/3.1'
       @api_key = {}
       @api_key_prefix = {}
       @timeout = 0

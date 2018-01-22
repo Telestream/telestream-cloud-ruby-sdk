@@ -21,7 +21,7 @@ module TelestreamCloud::Flip
     # Comma-separated list of profile names or IDs to be used during encoding. Alternatively, specify none so no encodings are created yet.
     attr_accessor :profiles
 
-    # Payload is an arbitrary text of length 256 or shorter that you can store along the Video. It is typically used to retain an association with one of your own DB record ID.
+    # Arbitrary string stored along the Video object.
     attr_accessor :payload
 
     # String-encoded JSON describing profiles pipeline.

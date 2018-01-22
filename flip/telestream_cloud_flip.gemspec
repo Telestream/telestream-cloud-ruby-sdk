@@ -19,11 +19,11 @@ Gem::Specification.new do |s|
   s.name        = "telestream_cloud_flip"
   s.version     = TelestreamCloud::Flip::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Swagger-Codegen"]
+  s.authors     = ["Telestream Cloud"]
   s.email       = ["cloudsupport@telestream.net"]
-  s.homepage    = "https://github.com/swagger-api/swagger-codegen"
-  s.summary     = "Flip API Ruby Gem"
-  s.description = "Description"
+  s.homepage    = "https://github.com/Telestream/telestream-cloud-ruby-sdk"
+  s.summary     = "Telestream Cloud Flip SDK"
+  s.description = "Telestream Cloud Flip SDK"
   # TODO uncommnet and update below with a proper license 
   #s.license     = "Apache 2.0"
   s.required_ruby_version = ">= 1.9"
