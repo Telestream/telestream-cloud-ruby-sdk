@@ -3,6 +3,46 @@
 This library provides a low-level interface to the REST API of Telestream Cloud, the online video encoding service.
 
 ## Getting Started
+Configure client, replace `[YOUR API KEY]` with proper `ApiKey`
+
+```ruby
+require 'telestream_cloud_qc'
+
+TelestreamCloud::Qc.configure do |config|
+  config.api_key['X-Api-Key'] = '[YOUR API KEY]'
+end
+
+api = TelestreamCloud::Qc::QcApi.new
+```
+Create a new project
+```ruby
+
+project =  api.create_project({data: {name: "MyProject", template: "amazon"}})
+```
+
+Upload file from local store, replace project id `[PROJECT ID]`
+
+```ruby
+upload = TelestreamCloud::Qc::Uploader.new(api, {
+   file: '/tmp/video.mp4',
+   project_id: '[PROJECT ID]',
+})
+
+puts upload.upload
+```
+
+Get status of job
+```ruby
+project_id = '[PROJECT ID]'
+job_id = '[JOB ID]'
+
+api.get_job(project_id, job_id)
+```
+
+Start a new job using URL to file
+```ruby
+api.create_job(project_id, {url: 'http://example.com/video.mp4'})
+```
 
 ## Documentation for API Endpoints
 

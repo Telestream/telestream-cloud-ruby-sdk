@@ -70,7 +70,7 @@ module TelestreamCloud::Qc
         :'name' => :'String',
         :'status' => :'String',
         :'template' => :'String',
-        :'options' => :'String'
+        :'options' => :'Hash<String, Object>'
       }
     end
 
@@ -99,7 +99,9 @@ module TelestreamCloud::Qc
       end
 
       if attributes.has_key?(:'options')
-        self.options = attributes[:'options']
+        if (value = attributes[:'options']).is_a?(Hash)
+          self.options = value
+        end
       end
 
     end

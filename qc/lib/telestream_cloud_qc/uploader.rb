@@ -238,6 +238,18 @@ module TelestreamCloud::Qc
                    end
 
                    @client.upload_video(@factory_id, @params)
+                 when "TelestreamCloud::Qc::QcApi"
+                   @project_id ||= @params.delete(:project_id) do |key|
+                     raise KeyError, "key not found: #{key}"
+                   end
+
+                   @client.upload_video(@project_id, @params)
+                 when "TelestreamCloud::Tts::TtsApi"
+                   @project_id ||= @params.delete(:project_id) do |key|
+                     raise KeyError, "key not found: #{key}"
+                   end
+
+                   @client.upload_video(@project_id, @params)
                  end
     end
   end

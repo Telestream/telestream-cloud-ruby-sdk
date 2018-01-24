@@ -7,6 +7,6 @@ Name | Type | Description | Notes
 **name** | **String** | Human-readable identifier of a Project. | [optional] 
 **status** | **String** | Project status. | [optional] 
 **template** | **String** | Name of QC template. | [optional] 
-**options** | **String** | JSON with specific options | [optional] 
+**options** | **Hash&lt;String, Object&gt;** | JSON with specific options | [optional] 
 
 
