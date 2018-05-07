@@ -51,10 +51,10 @@ Class | Method | HTTP request | Description
 *TelestreamCloud::Tts::TtsApi* | [**create_job**](docs/TtsApi.md#create_job) | **POST** /projects/{projectID}/jobs | Creates a new Job
 *TelestreamCloud::Tts::TtsApi* | [**create_project**](docs/TtsApi.md#create_project) | **POST** /projects | Creates a new Project
 *TelestreamCloud::Tts::TtsApi* | [**delete_corpus**](docs/TtsApi.md#delete_corpus) | **DELETE** /projects/{projectID}/corpora/{name} | Creates a new Corpus
-*TelestreamCloud::Tts::TtsApi* | [**delete_job**](docs/TtsApi.md#delete_job) | **DELETE** /projects/{projectID}/jobs/{id} | Deletes the Job
+*TelestreamCloud::Tts::TtsApi* | [**delete_job**](docs/TtsApi.md#delete_job) | **DELETE** /projects/{projectID}/jobs/{jobID} | Deletes the Job
 *TelestreamCloud::Tts::TtsApi* | [**delete_project**](docs/TtsApi.md#delete_project) | **DELETE** /projects/{projectID} | Deletes the Project
-*TelestreamCloud::Tts::TtsApi* | [**job**](docs/TtsApi.md#job) | **GET** /projects/{projectID}/jobs/{id} | Returns the Job
-*TelestreamCloud::Tts::TtsApi* | [**job_result**](docs/TtsApi.md#job_result) | **GET** /projects/{projectID}/jobs/{id}/result | Returns the Job Result
+*TelestreamCloud::Tts::TtsApi* | [**job**](docs/TtsApi.md#job) | **GET** /projects/{projectID}/jobs/{jobID} | Returns the Job
+*TelestreamCloud::Tts::TtsApi* | [**job_result**](docs/TtsApi.md#job_result) | **GET** /projects/{projectID}/jobs/{jobID}/result | Returns the Job Result
 *TelestreamCloud::Tts::TtsApi* | [**jobs**](docs/TtsApi.md#jobs) | **GET** /projects/{projectID}/jobs | Returns a collection of Jobs
 *TelestreamCloud::Tts::TtsApi* | [**project**](docs/TtsApi.md#project) | **GET** /projects/{projectID} | Returns the Project
 *TelestreamCloud::Tts::TtsApi* | [**projects**](docs/TtsApi.md#projects) | **GET** /projects | Returns a collection of Projects
@@ -84,7 +84,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 
-### apiKey
+### api_key
 
 - **Type**: API key
 - **API key parameter name**: X-Api-Key

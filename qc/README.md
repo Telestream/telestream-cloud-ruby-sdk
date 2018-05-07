@@ -62,6 +62,7 @@ Class | Method | HTTP request | Description
 *TelestreamCloud::Qc::QcApi* | [**remove_job**](docs/QcApi.md#remove_job) | **DELETE** /projects/{project_id}/jobs/{job_id}.json | 
 *TelestreamCloud::Qc::QcApi* | [**remove_project**](docs/QcApi.md#remove_project) | **DELETE** /projects/{project_id}.json | 
 *TelestreamCloud::Qc::QcApi* | [**signed_urls**](docs/QcApi.md#signed_urls) | **GET** /projects/{project_id}/jobs/{job_id}/signed-urls.json | 
+*TelestreamCloud::Qc::QcApi* | [**templates**](docs/QcApi.md#templates) | **GET** /templates.json | List all templates
 *TelestreamCloud::Qc::QcApi* | [**upload_video**](docs/QcApi.md#upload_video) | **POST** /projects/{project_id}/upload.json | Creates an upload session
 
 
@@ -82,6 +83,7 @@ Class | Method | HTTP request | Description
  - [TelestreamCloud::Qc::Options](docs/Options.md)
  - [TelestreamCloud::Qc::Project](docs/Project.md)
  - [TelestreamCloud::Qc::Proxy](docs/Proxy.md)
+ - [TelestreamCloud::Qc::Template](docs/Template.md)
  - [TelestreamCloud::Qc::UploadSession](docs/UploadSession.md)
  - [TelestreamCloud::Qc::VideoStream](docs/VideoStream.md)
  - [TelestreamCloud::Qc::VideoUploadBody](docs/VideoUploadBody.md)
@@ -90,7 +92,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
 
-### apiKey
+### api_key
 
 - **Type**: API key
 - **API key parameter name**: X-Api-Key

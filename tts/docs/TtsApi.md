@@ -10,10 +10,10 @@ Method | HTTP request | Description
 [**create_job**](TtsApi.md#create_job) | **POST** /projects/{projectID}/jobs | Creates a new Job
 [**create_project**](TtsApi.md#create_project) | **POST** /projects | Creates a new Project
 [**delete_corpus**](TtsApi.md#delete_corpus) | **DELETE** /projects/{projectID}/corpora/{name} | Creates a new Corpus
-[**delete_job**](TtsApi.md#delete_job) | **DELETE** /projects/{projectID}/jobs/{id} | Deletes the Job
+[**delete_job**](TtsApi.md#delete_job) | **DELETE** /projects/{projectID}/jobs/{jobID} | Deletes the Job
 [**delete_project**](TtsApi.md#delete_project) | **DELETE** /projects/{projectID} | Deletes the Project
-[**job**](TtsApi.md#job) | **GET** /projects/{projectID}/jobs/{id} | Returns the Job
-[**job_result**](TtsApi.md#job_result) | **GET** /projects/{projectID}/jobs/{id}/result | Returns the Job Result
+[**job**](TtsApi.md#job) | **GET** /projects/{projectID}/jobs/{jobID} | Returns the Job
+[**job_result**](TtsApi.md#job_result) | **GET** /projects/{projectID}/jobs/{jobID}/result | Returns the Job Result
 [**jobs**](TtsApi.md#jobs) | **GET** /projects/{projectID}/jobs | Returns a collection of Jobs
 [**project**](TtsApi.md#project) | **GET** /projects/{projectID} | Returns the Project
 [**projects**](TtsApi.md#projects) | **GET** /projects | Returns a collection of Projects
@@ -35,7 +35,7 @@ Returns a collection of Corpora
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ Returns the Corpus
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -146,7 +146,7 @@ Creates a new Corpus
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -183,7 +183,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -205,7 +205,7 @@ Creates a new Job
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -240,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -262,7 +262,7 @@ Creates a new Project
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -316,7 +316,7 @@ Creates a new Corpus
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -350,7 +350,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -372,7 +372,7 @@ Deletes the Job
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -406,7 +406,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -428,7 +428,7 @@ Deletes the Project
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -453,7 +453,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -475,7 +475,7 @@ Returns the Job
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -532,7 +532,7 @@ Returns the Job Result
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -567,7 +567,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -589,7 +589,7 @@ Returns a collection of Jobs
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -627,7 +627,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -649,7 +649,7 @@ Returns the Project
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -681,7 +681,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -703,7 +703,7 @@ Returns a collection of Projects
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -729,7 +729,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -751,7 +751,7 @@ Queues training
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -782,7 +782,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -804,7 +804,7 @@ Updates an existing Project
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -836,7 +836,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -856,7 +856,7 @@ Creates an upload session
 require 'telestream_cloud_tts'
 # setup authorization
 TelestreamCloud::Tts.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -891,7 +891,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 

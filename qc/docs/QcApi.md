@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**remove_job**](QcApi.md#remove_job) | **DELETE** /projects/{project_id}/jobs/{job_id}.json | 
 [**remove_project**](QcApi.md#remove_project) | **DELETE** /projects/{project_id}.json | 
 [**signed_urls**](QcApi.md#signed_urls) | **GET** /projects/{project_id}/jobs/{job_id}/signed-urls.json | 
+[**templates**](QcApi.md#templates) | **GET** /templates.json | List all templates
 [**upload_video**](QcApi.md#upload_video) | **POST** /projects/{project_id}/upload.json | Creates an upload session
 
 
@@ -30,7 +31,7 @@ Method | HTTP request | Description
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -63,7 +64,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -83,7 +84,7 @@ Create a new job
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -118,7 +119,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -138,7 +139,7 @@ Create a new project
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -171,7 +172,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -191,7 +192,7 @@ Get QC job
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -226,7 +227,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -246,7 +247,7 @@ Get project by Id
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -278,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -298,7 +299,7 @@ Get jobs form projects
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -340,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -360,7 +361,7 @@ List all projects for an account
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -386,7 +387,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -406,7 +407,7 @@ Modify project
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -442,7 +443,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -462,7 +463,7 @@ Name | Type | Description  | Notes
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -496,7 +497,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -516,7 +517,7 @@ Name | Type | Description  | Notes
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -549,7 +550,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -569,7 +570,7 @@ nil (empty response body)
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -599,7 +600,7 @@ nil (empty response body)
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -619,7 +620,7 @@ nil (empty response body)
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -653,7 +654,53 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **templates**
+> Array&lt;Template&gt; templates
+
+List all templates
+
+### Example
+```ruby
+# load the gem
+require 'telestream_cloud_qc'
+# setup authorization
+TelestreamCloud::Qc.configure do |config|
+  # Configure API key authorization: api_key
+  config.api_key['X-Api-Key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['X-Api-Key'] = 'Bearer'
+end
+
+api_instance = TelestreamCloud::Qc::QcApi.new
+
+begin
+  #List all templates
+  result = api_instance.templates
+  p result
+rescue TelestreamCloud::Qc::ApiError => e
+  puts "Exception when calling QcApi->templates: #{e}"
+end
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**Array&lt;Template&gt;**](Template.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 
@@ -673,7 +720,7 @@ Creates an upload session
 require 'telestream_cloud_qc'
 # setup authorization
 TelestreamCloud::Qc.configure do |config|
-  # Configure API key authorization: apiKey
+  # Configure API key authorization: api_key
   config.api_key['X-Api-Key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
   #config.api_key_prefix['X-Api-Key'] = 'Bearer'
@@ -708,7 +755,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey)
+[api_key](../README.md#api_key)
 
 ### HTTP request headers
 

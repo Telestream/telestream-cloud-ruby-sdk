@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **String** |  | [optional] 
-**bitrate** | **String** | File bitrate measured in bps | [optional] 
+**bitrate** | **Integer** | File bitrate measured in bps | [optional] 
 
 
