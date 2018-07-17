@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **audio_codec** | **String** | A codec that has been used to encode audio streams. | [optional] 
 **audio_sample_rate** | **Integer** | A number of samples of audio carried per second. | [optional] 
 **created_at** | **String** | A date and time when the Video has been created. | [optional] 
-**duration** | **Integer** | A duration of the video in seconds. | [optional] 
+**duration** | **Integer** | A duration of the video in milliseconds. | [optional] 
 **encodings_count** | **Integer** | A number of related Encoding objects. | [optional] 
 **error_class** | **String** | A class of an error that has occurred during the encoding process. It is present only if the encoding status is equal to &#x60;fail&#x60;. | [optional] 
 **error_message** | **String** | A message that explains why the encoding process has resulted in an error. It is present only if the encoding status is equal to &#x60;fail&#x60;. | [optional] 
