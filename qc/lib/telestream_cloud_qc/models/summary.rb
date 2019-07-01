@@ -13,30 +13,45 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module TelestreamCloud::Qc
-  # Description of the processed media file.
-  class Media
-    attr_accessor :audio
 
-    attr_accessor :video
+  class Summary
+    # Total number of synchronization detection events considered for summary.
+    attr_accessor :num_sync_events
 
-    attr_accessor :container
+    attr_accessor :avsync_analysis
+
+    attr_accessor :avsync_inference
+
+    # Confidence of avsync_inference and avsync_analysis. 'confidence' is a value between 0 and 100. confidence >= 90  - Very high confidence. 80 <= confidence < 90   - High confidence. 70 <= confidence < 80   - Should be reviewed by human. 
+    attr_accessor :confidence
+
+    # Skew estimate in #frames; Skew is the number of frames that audio is delayed to the video
+    attr_accessor :skew
+
+    attr_accessor :total_length
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'audio' => :'audio',
-        :'video' => :'video',
-        :'container' => :'container'
+        :'num_sync_events' => :'num_sync_events',
+        :'avsync_analysis' => :'avsync_analysis',
+        :'avsync_inference' => :'avsync_inference',
+        :'confidence' => :'confidence',
+        :'skew' => :'skew',
+        :'total_length' => :'total_length'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'audio' => :'Array<AudioStream>',
-        :'video' => :'Array<VideoStream>',
-        :'container' => :'Container'
+        :'num_sync_events' => :'Integer',
+        :'avsync_analysis' => :'String',
+        :'avsync_inference' => :'String',
+        :'confidence' => :'Float',
+        :'skew' => :'Integer',
+        :'total_length' => :'Float'
       }
     end
 
@@ -48,20 +63,28 @@ module TelestreamCloud::Qc
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'audio')
-        if (value = attributes[:'audio']).is_a?(Array)
-          self.audio = value
-        end
+      if attributes.has_key?(:'num_sync_events')
+        self.num_sync_events = attributes[:'num_sync_events']
       end
 
-      if attributes.has_key?(:'video')
-        if (value = attributes[:'video']).is_a?(Array)
-          self.video = value
-        end
+      if attributes.has_key?(:'avsync_analysis')
+        self.avsync_analysis = attributes[:'avsync_analysis']
       end
 
-      if attributes.has_key?(:'container')
-        self.container = attributes[:'container']
+      if attributes.has_key?(:'avsync_inference')
+        self.avsync_inference = attributes[:'avsync_inference']
+      end
+
+      if attributes.has_key?(:'confidence')
+        self.confidence = attributes[:'confidence']
+      end
+
+      if attributes.has_key?(:'skew')
+        self.skew = attributes[:'skew']
+      end
+
+      if attributes.has_key?(:'total_length')
+        self.total_length = attributes[:'total_length']
       end
 
     end
@@ -84,9 +107,12 @@ module TelestreamCloud::Qc
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          audio == o.audio &&
-          video == o.video &&
-          container == o.container
+          num_sync_events == o.num_sync_events &&
+          avsync_analysis == o.avsync_analysis &&
+          avsync_inference == o.avsync_inference &&
+          confidence == o.confidence &&
+          skew == o.skew &&
+          total_length == o.total_length
     end
 
     # @see the `==` method
@@ -98,7 +124,7 @@ module TelestreamCloud::Qc
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [audio, video, container].hash
+      [num_sync_events, avsync_analysis, avsync_inference, confidence, skew, total_length].hash
     end
 
     # Builds the object from hash

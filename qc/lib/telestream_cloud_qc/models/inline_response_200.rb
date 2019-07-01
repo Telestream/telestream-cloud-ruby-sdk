@@ -13,30 +13,26 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module TelestreamCloud::Qc
-  # Description of the processed media file.
-  class Media
-    attr_accessor :audio
 
-    attr_accessor :video
+  class InlineResponse200
+    attr_accessor :project_name
 
-    attr_accessor :container
+    attr_accessor :project_id
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'audio' => :'audio',
-        :'video' => :'video',
-        :'container' => :'container'
+        :'project_name' => :'project_name',
+        :'project_id' => :'project_id'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'audio' => :'Array<AudioStream>',
-        :'video' => :'Array<VideoStream>',
-        :'container' => :'Container'
+        :'project_name' => :'String',
+        :'project_id' => :'String'
       }
     end
 
@@ -48,20 +44,12 @@ module TelestreamCloud::Qc
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'audio')
-        if (value = attributes[:'audio']).is_a?(Array)
-          self.audio = value
-        end
+      if attributes.has_key?(:'project_name')
+        self.project_name = attributes[:'project_name']
       end
 
-      if attributes.has_key?(:'video')
-        if (value = attributes[:'video']).is_a?(Array)
-          self.video = value
-        end
-      end
-
-      if attributes.has_key?(:'container')
-        self.container = attributes[:'container']
+      if attributes.has_key?(:'project_id')
+        self.project_id = attributes[:'project_id']
       end
 
     end
@@ -84,9 +72,8 @@ module TelestreamCloud::Qc
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          audio == o.audio &&
-          video == o.video &&
-          container == o.container
+          project_name == o.project_name &&
+          project_id == o.project_id
     end
 
     # @see the `==` method
@@ -98,7 +85,7 @@ module TelestreamCloud::Qc
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [audio, video, container].hash
+      [project_name, project_id].hash
     end
 
     # Builds the object from hash

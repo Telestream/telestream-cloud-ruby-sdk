@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**create_project**](QcApi.md#create_project) | **POST** /projects.json | Create a new project
 [**get_job**](QcApi.md#get_job) | **GET** /projects/{project_id}/jobs/{job_id}.json | Get QC job
 [**get_project**](QcApi.md#get_project) | **GET** /projects/{project_id}.json | Get project by Id
+[**import_template**](QcApi.md#import_template) | **POST** /projects/import.json | Import Vidchecker template
 [**list_jobs**](QcApi.md#list_jobs) | **GET** /projects/{project_id}/jobs.json | Get jobs form projects
 [**list_projects**](QcApi.md#list_projects) | **GET** /projects.json | List all projects for an account
 [**modify_project**](QcApi.md#modify_project) | **PUT** /projects/{project_id}.json | Modify project
@@ -284,6 +285,61 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **import_template**
+> Array&lt;InlineResponse200&gt; import_template(opts)
+
+Import Vidchecker template
+
+### Example
+```ruby
+# load the gem
+require 'telestream_cloud_qc'
+# setup authorization
+TelestreamCloud::Qc.configure do |config|
+  # Configure API key authorization: api_key
+  config.api_key['X-Api-Key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  #config.api_key_prefix['X-Api-Key'] = 'Bearer'
+end
+
+api_instance = TelestreamCloud::Qc::QcApi.new
+
+opts = { 
+  name: "name_example", # String | 
+  file: File.new("/path/to/file.txt") # File | 
+}
+
+begin
+  #Import Vidchecker template
+  result = api_instance.import_template(opts)
+  p result
+rescue TelestreamCloud::Qc::ApiError => e
+  puts "Exception when calling QcApi->import_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **String**|  | [optional] 
+ **file** | **File**|  | [optional] 
+
+### Return type
+
+[**Array&lt;InlineResponse200&gt;**](InlineResponse200.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: text/xml
  - **Accept**: application/json
 
 

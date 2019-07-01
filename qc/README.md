@@ -55,6 +55,7 @@ Class | Method | HTTP request | Description
 *TelestreamCloud::Qc::QcApi* | [**create_project**](docs/QcApi.md#create_project) | **POST** /projects.json | Create a new project
 *TelestreamCloud::Qc::QcApi* | [**get_job**](docs/QcApi.md#get_job) | **GET** /projects/{project_id}/jobs/{job_id}.json | Get QC job
 *TelestreamCloud::Qc::QcApi* | [**get_project**](docs/QcApi.md#get_project) | **GET** /projects/{project_id}.json | Get project by Id
+*TelestreamCloud::Qc::QcApi* | [**import_template**](docs/QcApi.md#import_template) | **POST** /projects/import.json | Import Vidchecker template
 *TelestreamCloud::Qc::QcApi* | [**list_jobs**](docs/QcApi.md#list_jobs) | **GET** /projects/{project_id}/jobs.json | Get jobs form projects
 *TelestreamCloud::Qc::QcApi* | [**list_projects**](docs/QcApi.md#list_projects) | **GET** /projects.json | List all projects for an account
 *TelestreamCloud::Qc::QcApi* | [**modify_project**](docs/QcApi.md#modify_project) | **PUT** /projects/{project_id}.json | Modify project
@@ -74,6 +75,8 @@ Class | Method | HTTP request | Description
  - [TelestreamCloud::Qc::Data](docs/Data.md)
  - [TelestreamCloud::Qc::Data1](docs/Data1.md)
  - [TelestreamCloud::Qc::ExtraFile](docs/ExtraFile.md)
+ - [TelestreamCloud::Qc::InlineResponse200](docs/InlineResponse200.md)
+ - [TelestreamCloud::Qc::InlineResponse422](docs/InlineResponse422.md)
  - [TelestreamCloud::Qc::Job](docs/Job.md)
  - [TelestreamCloud::Qc::JobData](docs/JobData.md)
  - [TelestreamCloud::Qc::JobDetails](docs/JobDetails.md)
@@ -83,6 +86,8 @@ Class | Method | HTTP request | Description
  - [TelestreamCloud::Qc::Options](docs/Options.md)
  - [TelestreamCloud::Qc::Project](docs/Project.md)
  - [TelestreamCloud::Qc::Proxy](docs/Proxy.md)
+ - [TelestreamCloud::Qc::Summary](docs/Summary.md)
+ - [TelestreamCloud::Qc::SynchronizationEvent](docs/SynchronizationEvent.md)
  - [TelestreamCloud::Qc::Template](docs/Template.md)
  - [TelestreamCloud::Qc::UploadSession](docs/UploadSession.md)
  - [TelestreamCloud::Qc::VideoStream](docs/VideoStream.md)

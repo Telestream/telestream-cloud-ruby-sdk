@@ -13,30 +13,30 @@ Swagger Codegen version: 2.3.1
 require 'date'
 
 module TelestreamCloud::Qc
-  # Description of the processed media file.
-  class Media
-    attr_accessor :audio
 
-    attr_accessor :video
+  class SynchronizationEvent
+    attr_accessor :timestamp
 
-    attr_accessor :container
+    attr_accessor :skew
+
+    attr_accessor :result
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'audio' => :'audio',
-        :'video' => :'video',
-        :'container' => :'container'
+        :'timestamp' => :'timestamp',
+        :'skew' => :'skew',
+        :'result' => :'result'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'audio' => :'Array<AudioStream>',
-        :'video' => :'Array<VideoStream>',
-        :'container' => :'Container'
+        :'timestamp' => :'String',
+        :'skew' => :'Integer',
+        :'result' => :'String'
       }
     end
 
@@ -48,20 +48,16 @@ module TelestreamCloud::Qc
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'audio')
-        if (value = attributes[:'audio']).is_a?(Array)
-          self.audio = value
-        end
+      if attributes.has_key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
       end
 
-      if attributes.has_key?(:'video')
-        if (value = attributes[:'video']).is_a?(Array)
-          self.video = value
-        end
+      if attributes.has_key?(:'skew')
+        self.skew = attributes[:'skew']
       end
 
-      if attributes.has_key?(:'container')
-        self.container = attributes[:'container']
+      if attributes.has_key?(:'result')
+        self.result = attributes[:'result']
       end
 
     end
@@ -84,9 +80,9 @@ module TelestreamCloud::Qc
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          audio == o.audio &&
-          video == o.video &&
-          container == o.container
+          timestamp == o.timestamp &&
+          skew == o.skew &&
+          result == o.result
     end
 
     # @see the `==` method
@@ -98,7 +94,7 @@ module TelestreamCloud::Qc
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [audio, video, container].hash
+      [timestamp, skew, result].hash
     end
 
     # Builds the object from hash
