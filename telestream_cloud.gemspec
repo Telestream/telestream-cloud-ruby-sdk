@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.summary     = %q{Telestream Cloud SDK}
   s.description = %q{Telestream Cloud SDK}
 
-  s.add_dependency "telestream_cloud_flip", "2.0.0"
-  s.add_dependency "telestream_cloud_tts", "2.0.0"
-  s.add_dependency "telestream_cloud_qc", "2.0.0"
+  s.add_dependency "telestream_cloud_flip", "~>2.0.0"
+  s.add_dependency "telestream_cloud_tts", "~>2.0.0"
+  s.add_dependency "telestream_cloud_qc", "~>2.0.0"
 
   s.rubyforge_project = "telestream_cloud"
 
